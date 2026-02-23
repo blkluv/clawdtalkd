@@ -3,6 +3,11 @@
 ClawdTalk AI Missions API client using only Python standard library.
 Proxies all requests through ClawdTalk instead of calling Telnyx directly.
 Usage: python telnyx_api.py <command> [args...]
+
+Env vars: CLAWDTALK_API_KEY, CLAWDTALK_API_URL
+Endpoints: https://clawdtalk.com/v1
+Reads: skill-config.json
+Writes: .missions_state.json
 """
 
 import json

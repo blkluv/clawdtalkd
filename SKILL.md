@@ -2,12 +2,30 @@
 name: clawdtalk-client
 version: 2.0.0
 description: ClawdTalk — Voice calls, SMS, and AI Missions for Clawdbot
-metadata: {"clawdbot":{"emoji":"📞","requires":{"bins":["bash","node","jq","python3"]}}}
+metadata: {"clawdbot":{"emoji":"📞","primaryEnv":"CLAWDTALK_API_KEY","homepage":"https://github.com/team-telnyx/clawdtalk-client","requires":{"env":["CLAWDTALK_API_KEY"],"bins":["bash","node","jq","python3"],"config":["skill-config.json","~/.openclaw/openclaw.json","~/.clawdbot/clawdbot.json"]}}}
 ---
 
 # ClawdTalk
 
 Voice calling, SMS messaging, and AI Missions for Clawdbot. Call your bot by phone, send texts, or run autonomous multi-step outreach campaigns — powered by ClawdTalk.
+
+> **Trust:** By using this skill, voice transcripts, SMS messages, and mission data are sent to clawdtalk.com (operated by Telnyx). Only install if you trust this service with your conversation data.
+
+## External Endpoints
+
+| Endpoint | Used by | Data sent |
+|----------|---------|-----------|
+| `https://clawdtalk.com` (WebSocket) | `ws-client.js` | Voice transcripts, tool results, conversation state |
+| `https://clawdtalk.com/v1/*` | `telnyx_api.py` | Mission state, events, scheduled calls/SMS, assistant configs |
+| `http://127.0.0.1:<port>` | `ws-client.js` | Transcribed speech (local gateway only) |
+| `https://raw.githubusercontent.com/team-telnyx/clawdtalk-client/...` | `update.sh` | None (download only) |
+
+## Security & Privacy
+
+- Voice transcripts and SMS content are transmitted to clawdtalk.com.
+- Mission state and events are stored server-side for tracking and insights.
+- `setup.sh` reads gateway config to extract connection details; with confirmation it adds a voice agent and `sessions_send` to `gateway.tools.allow`.
+- API key is stored in `skill-config.json` — use env var `CLAWDTALK_API_KEY` or a `${CLAWDTALK_API_KEY}` reference to avoid plaintext storage.
 
 ---
 
@@ -139,6 +157,7 @@ The script always works with local IDs. You don't need to worry about Telnyx IDs
 2. **Add your phone** in Settings
 3. **Get API key** from Dashboard
 4. **Run setup**: `./setup.sh`
+   > `setup.sh` reads your gateway config to extract connection details, adds a voice agent to `agents.list`, and (with confirmation) adds `sessions_send` to `gateway.tools.allow`. Gateway config is at `~/.openclaw/openclaw.json` or `~/.clawdbot/clawdbot.json`.
 5. **Start connection**: `./scripts/connect.sh start`
 
 ## Voice Calls

@@ -8,6 +8,10 @@
 #
 # Usage: ./setup.sh
 #
+# Env vars: none directly
+# Endpoints: none
+# Reads: ~/.openclaw/openclaw.json, ~/.clawdbot/clawdbot.json, USER.md, IDENTITY.md
+# Writes: skill-config.json, gateway config
 
 set -e
 
@@ -310,11 +314,7 @@ if [ -n "$GATEWAY_CONFIG" ] && [ -f "$GATEWAY_CONFIG" ]; then
                 mv "$tmp_config" "$GATEWAY_CONFIG"
                 echo "   ✓ Added sessions_send to gateway.tools.allow"
                 sessions_send_allowed=true
-                # Restart gateway
-                if command -v "$CLI_NAME" &> /dev/null; then
-                    echo "   ↻ Restarting gateway..."
-                    $CLI_NAME gateway restart 2>/dev/null && echo "   ✓ Gateway restarted" || echo "   ⚠️  Run '$CLI_NAME gateway restart' manually"
-                fi
+                echo "   ⚠️  Run '$CLI_NAME gateway restart' to apply changes"
             else
                 rm -f "$tmp_config"
                 echo "   ⚠️  Could not auto-configure — add it manually (see below)"
