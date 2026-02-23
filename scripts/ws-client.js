@@ -385,7 +385,7 @@ class ClawdTalkClient {
       'push to', 'merge', 'deploy',
       'transfer', 'payment', 'purchase', 'buy',
       'add file', 'add a file', 'modify', 'change',
-      'commit', 'write to', 'readme',
+      'commit', 'write to',
     ];
     return sensitivePatterns.some(function(p) { return lower.includes(p); });
   }
