@@ -8,6 +8,10 @@
 #
 # Usage: ./connect.sh {start|stop|status|restart} [--server <url>]
 #
+# Env vars: via .env
+# Endpoints: none (launches ws-client.js)
+# Reads: skill-config.json, .env
+# Writes: .connect.pid, .connect.log
 
 set -e
 

@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 /**
  * ClawdTalk WebSocket Client v1.3.0
- * 
+ *
  * Connects to ClawdTalk server and routes voice calls to your Clawdbot gateway.
  * Phone → STT → Gateway Agent → TTS → Phone
- * 
+ *
  * v1.3.0: Instant approval via WebSocket (no more polling delay)
+ *
+ * Env vars: OPENCLAW_GATEWAY_URL, CLAWDBOT_GATEWAY_URL, OPENCLAW_GATEWAY_TOKEN, CLAWDBOT_GATEWAY_TOKEN
+ * Endpoints: https://clawdtalk.com (WebSocket), http://127.0.0.1:<port> (local gateway)
+ * Reads: skill-config.json
+ * Writes: none
  */
 
 const WebSocket = require('ws');

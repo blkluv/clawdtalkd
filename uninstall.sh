@@ -7,6 +7,10 @@
 #
 # Usage: ./uninstall.sh
 #
+# Env vars: none
+# Endpoints: none
+# Reads: skill-config.json, gateway config
+# Writes: gateway config
 
 set -e
 

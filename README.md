@@ -59,6 +59,8 @@ Start the connection, then call your ClawdTalk number:
 
 Keep it running via crontab:
 
+> **Note:** This keeps a persistent WebSocket connection to clawdtalk.com. Voice transcripts are transmitted in real-time when calls are active.
+
 ```bash
 # Add to crontab (crontab -e):
 @reboot cd ~/clawd/skills/clawdtalk-client && ./scripts/connect.sh start

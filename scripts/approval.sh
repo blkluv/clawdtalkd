@@ -11,6 +11,10 @@
 #   ./approval.sh request "Delete 50 files" --biometric --timeout 120
 #   ./approval.sh status <request_id>
 #
+# Env vars: none
+# Endpoints: https://clawdtalk.com
+# Reads: skill-config.json
+# Writes: none
 
 set -e
 
