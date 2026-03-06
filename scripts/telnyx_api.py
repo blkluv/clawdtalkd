@@ -784,18 +784,21 @@ def setup_voice_agent(
     if mission_id and run_id:
         link_telnyx_agent(mission_id, run_id, assistant_id)
 
-    # Get available phone number
+    # Get user's dedicated number (used as from number for outbound calls)
     phone_id, phone_number = get_available_phone_number()
     if not phone_id:
+        print(
+            "ERROR: Cannot schedule outbound calls — no dedicated phone number found. "
+            "The user needs to purchase a dedicated number in the Clawtalk portal "
+            "(Starter or Pro subscription required).",
+            file=sys.stderr,
+        )
         return assistant_id, None
 
-    # Get connection ID and assign
-    connection_id = get_assistant_connection_id(assistant_id, "telephony")
-    if connection_id:
-        assign_phone_number(phone_id, connection_id, "voice")
-        update_mission_state(
-            mission_slug, {"agent_phone": phone_number, "phone_number_id": phone_id}
-        )
+
+    update_mission_state(
+        mission_slug, {"agent_phone": phone_number, "phone_number_id": phone_id}
+    )
 
     return assistant_id, phone_number
 
